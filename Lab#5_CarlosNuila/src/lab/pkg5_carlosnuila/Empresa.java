@@ -5,6 +5,7 @@
  */
 package lab.pkg5_carlosnuila;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,6 +20,7 @@ public class Empresa {
     String ubicacion;
     int idSucursal;
     String pinAcceso;
+    ArrayList<Empleado> listaEmpleados = new ArrayList();
 
     public Empresa() {
     }
@@ -62,6 +64,14 @@ public class Empresa {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public ArrayList<Empleado> getListaEmpleados() {
+        return listaEmpleados;
+    }
+
+    public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
+        this.listaEmpleados = listaEmpleados;
     }
 
     public int getIdSucursal() {

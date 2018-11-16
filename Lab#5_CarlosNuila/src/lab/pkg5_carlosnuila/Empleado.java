@@ -15,17 +15,27 @@ public class Empleado {
     
     String nombreEmpleado;
     Date fechaNacimiento;
+    String correo;
     String cargo;
     double salario;
 
     public Empleado() {
     }
 
-    public Empleado(String nombreEmpleado, Date fechaNacimiento, String cargo, double salario) {
+    public Empleado(String nombreEmpleado, Date fechaNacimiento, String correo, String cargo, double salario) {
         this.nombreEmpleado = nombreEmpleado;
         this.fechaNacimiento = fechaNacimiento;
+        this.correo = correo;
         this.cargo = cargo;
         this.salario = salario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getNombreEmpleado() {
