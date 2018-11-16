@@ -7,6 +7,9 @@ package lab.pkg5_carlosnuila;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -20,8 +23,8 @@ public class Empresa {
     String ubicacion;
     int idSucursal;
     String pinAcceso;
-    ArrayList<Empleado> listaEmpleados = new ArrayList();
-
+    DefaultTreeModel modelo_empresa;
+    
     public Empresa() {
     }
 
@@ -32,6 +35,16 @@ public class Empresa {
         this.ubicacion = ubicacion;
         this.idSucursal = idSucursal;
         this.pinAcceso = pinAcceso;
+    }
+    
+    public Empresa(String nombreEmpresa, double capital, Date fechaFundación, String ubicacion, int idSucursal, String pinAcceso, DefaultTreeModel modelo_empresa) {
+        this.nombreEmpresa = nombreEmpresa;
+        this.capital = capital;
+        this.fechaFundación = fechaFundación;
+        this.ubicacion = ubicacion;
+        this.idSucursal = idSucursal;
+        this.pinAcceso = pinAcceso;
+        this.modelo_empresa = modelo_empresa;
     }
 
     public String getNombreEmpresa() {
@@ -65,15 +78,7 @@ public class Empresa {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
-
-    public ArrayList<Empleado> getListaEmpleados() {
-        return listaEmpleados;
-    }
-
-    public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
-        this.listaEmpleados = listaEmpleados;
-    }
-
+    
     public int getIdSucursal() {
         return idSucursal;
     }
@@ -90,6 +95,14 @@ public class Empresa {
         this.pinAcceso = pinAcceso;
     }
 
+    public DefaultTreeModel getModelo_Empresa() {
+        return modelo_empresa;
+    }
+
+    public void setModelo_empresa(DefaultTreeModel modelo_empresa) {
+        this.modelo_empresa = modelo_empresa;
+    }
+    
     @Override
     public String toString() {
         return nombreEmpresa;

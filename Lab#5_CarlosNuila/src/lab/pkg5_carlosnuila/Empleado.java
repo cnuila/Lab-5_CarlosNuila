@@ -5,6 +5,7 @@
  */
 package lab.pkg5_carlosnuila;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ public class Empleado {
     String correo;
     String cargo;
     double salario;
+    ArrayList<Empleado> empleadoContratado = new ArrayList();
 
     public Empleado() {
     }
@@ -69,6 +71,16 @@ public class Empleado {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
+    public ArrayList<Empleado> getEmpleadoContratado() {
+        return empleadoContratado;
+    }
+
+    public void setEmpleadoContratado(ArrayList<Empleado> empleadoContratado) {
+        this.empleadoContratado = empleadoContratado;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -68,6 +70,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jt_correo = new javax.swing.JTextField();
         cb_cargo = new javax.swing.JComboBox<>();
         jb_crearEmpleado2 = new javax.swing.JButton();
+        popMenu_empleado = new javax.swing.JPopupMenu();
+        jmi_modificar = new javax.swing.JMenuItem();
+        jmi_eliminar = new javax.swing.JMenuItem();
+        jmi_detalles = new javax.swing.JMenuItem();
+        jmi_contratar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -186,6 +193,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jt_empresa.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_empresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_empresaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_empresa);
 
         jb_crearEmpleado.setText("Crear Empleado");
@@ -195,6 +207,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jl_listaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_listaEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jl_listaEmpleados);
 
         jLabel11.setText("Lista Empleados");
@@ -320,6 +337,23 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jmi_modificar.setText("Modificar");
+        popMenu_empleado.add(jmi_modificar);
+
+        jmi_eliminar.setText("Eliminar");
+        popMenu_empleado.add(jmi_eliminar);
+
+        jmi_detalles.setText("Ver Detalles");
+        popMenu_empleado.add(jmi_detalles);
+
+        jmi_contratar.setText("Contratar");
+        jmi_contratar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_contratarActionPerformed(evt);
+            }
+        });
+        popMenu_empleado.add(jmi_contratar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -435,7 +469,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 }
             }
             if (nombre == -1 && idsuc == -1) {
-                listaEmpresas.add(new Empresa(nombreEmpresa, capital, fechaFundacion, ubicacion, idSucursal, pinAcceso));
+                DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
+                DefaultMutableTreeNode raiz_empresa = new DefaultMutableTreeNode(new Empresa(nombreEmpresa, capital, fechaFundacion, ubicacion, idSucursal, pinAcceso));
+                modeloArbol.setRoot(raiz_empresa);
+                listaEmpresas.add(new Empresa(nombreEmpresa, capital, fechaFundacion, ubicacion, idSucursal, pinAcceso, modeloArbol));
                 JOptionPane.showMessageDialog(jd_CrearEmpresa, "Empresa Creada Existosamente");
                 jt_idSucursal.setText("");
                 jt_nombreEmpresa.setText("");
@@ -456,7 +493,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < listaEmpresas.size(); i++) {
             String s1 = jt_idEmpresa.getText();
             String s2 = listaEmpresas.get(i).getIdSucursal() + "";
-            if(s1.equals(s2)){
+            if (s1.equals(s2)) {
                 nombreEmpresa = 1;
             }
             if (pf_pinacceso.getText().equals(listaEmpresas.get(i).getPinAcceso())) {
@@ -471,9 +508,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             jd_interfazUsuario.setModal(true);
             jd_interfazUsuario.setLocationRelativeTo(this);
             jl_nombreEmpresa.setText(empresaActual.getNombreEmpresa());
-            jl_idempresa.setText(String.valueOf(empresaActual.getIdSucursal()));
+            jl_idempresa.setText(String.valueOf("ID " + empresaActual.getIdSucursal()));
+            DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
+            modeloArbol = empresaActual.getModelo_Empresa();
             jd_interfazUsuario.setVisible(true);
-            
         } else {
             JOptionPane.showMessageDialog(this, "Usuario y/o Contraseña Incorrecto");
         }
@@ -510,7 +548,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             if (cargo.equals("Maestro")) {
                 salario = 2000;
             }
-            empresaActual.getListaEmpleados().add(new Empleado(nombreEmpleado, fechaNacimiento, correo, cargo, salario));
             DefaultListModel modeloLista = (DefaultListModel) jl_listaEmpleados.getModel();
             modeloLista.addElement(new Empleado(nombreEmpleado, fechaNacimiento, correo, cargo, salario));
             jl_listaEmpleados.setModel(modeloLista);
@@ -518,6 +555,35 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jd_CrearEmpleado, "Ocurrio un error Fatal");
         }
     }//GEN-LAST:event_jb_crearEmpleado2MouseClicked
+
+    private void jl_listaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_listaEmpleadosMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            popMenu_empleado.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jl_listaEmpleadosMouseClicked
+
+    private void jmi_contratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_contratarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jmi_contratarActionPerformed
+
+    private void jt_empresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_empresaMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+
+        } else {
+            int row = jt_empresa.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_empresa.setSelectionRow(row);
+            Object v1 = jt_empresa.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            if (nodo_seleccionado.getUserObject() instanceof Empresa) {
+                 = (Personas) nodo_seleccionado.getUserObject();
+                menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+
+    }//GEN-LAST:event_jt_empresaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -588,6 +654,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jl_idempresa;
     private javax.swing.JList<String> jl_listaEmpleados;
     private javax.swing.JLabel jl_nombreEmpresa;
+    private javax.swing.JMenuItem jmi_contratar;
+    private javax.swing.JMenuItem jmi_detalles;
+    private javax.swing.JMenuItem jmi_eliminar;
+    private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JTextField jt_correo;
     private javax.swing.JTree jt_empresa;
     private javax.swing.JTextField jt_idEmpresa;
@@ -597,8 +667,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jt_pinAccesoCrear;
     private javax.swing.JTextField jt_ubicacionEmpresa;
     private javax.swing.JPasswordField pf_pinacceso;
+    private javax.swing.JPopupMenu popMenu_empleado;
     // End of variables declaration//GEN-END:variables
     ArrayList<Empresa> listaEmpresas = new ArrayList();
     Empresa empresaActual;
-
+    DefaultMutableTreeNode nodo_seleccionado;
 }
