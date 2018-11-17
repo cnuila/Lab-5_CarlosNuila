@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -608,7 +609,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 }
             }
             if (nombre == -1 && idsuc == -1) {
-                JTree temporal = jt_empresa;
+                JTree temporal = new JTree();
                 DefaultTreeModel modeloArbol = (DefaultTreeModel) temporal.getModel();
                 DefaultMutableTreeNode raiz_empresa = new DefaultMutableTreeNode(new Empresa(nombreEmpresa, capital, fechaFundacion, ubicacion, idSucursal, pinAcceso));
                 modeloArbol.setRoot(raiz_empresa);
@@ -648,10 +649,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             jd_interfazUsuario.pack();
             jd_interfazUsuario.setModal(true);
             jd_interfazUsuario.setLocationRelativeTo(this);
+            jt_empresa.setModel(empresaActual.getModelo_Empresa());
             DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
+            modeloArbol.reload();
             jl_nombreEmpresa.setText(empresaActual.getNombreEmpresa());
             jl_idempresa.setText(String.valueOf("ID " + empresaActual.getIdSucursal()));
-            modeloArbol = empresaActual.getModelo_Empresa();
             jd_interfazUsuario.setVisible(true);
             jt_idEmpresa.setText("");
             pf_pinacceso.setText("");
