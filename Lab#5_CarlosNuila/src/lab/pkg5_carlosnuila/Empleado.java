@@ -19,11 +19,16 @@ public class Empleado {
     String correo;
     String cargo;
     double salario;
-    ArrayList<Empleado> empleadoContratado = new ArrayList();
 
     public Empleado() {
     }
 
+    public Empleado(String nombreEmpleado, String correo, String cargo) {
+        this.nombreEmpleado = nombreEmpleado;
+        this.correo = correo;
+        this.cargo = cargo;
+    }
+    
     public Empleado(String nombreEmpleado, Date fechaNacimiento, String correo, String cargo, double salario) {
         this.nombreEmpleado = nombreEmpleado;
         this.fechaNacimiento = fechaNacimiento;
@@ -71,17 +76,7 @@ public class Empleado {
     public void setSalario(double salario) {
         this.salario = salario;
     }
-
-    public ArrayList<Empleado> getEmpleadoContratado() {
-        return empleadoContratado;
-    }
-
-    public void setEmpleadoContratado(ArrayList<Empleado> empleadoContratado) {
-        this.empleadoContratado = empleadoContratado;
-    }
     
-    
-
     @Override
     public String toString() {
         return nombreEmpleado;
