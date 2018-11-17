@@ -59,6 +59,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jl_listaEmpleados = new javax.swing.JList<>();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jd_CrearEmpleado = new javax.swing.JDialog();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -75,6 +76,19 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jmi_eliminar = new javax.swing.JMenuItem();
         jmi_detalles = new javax.swing.JMenuItem();
         jmi_contratar = new javax.swing.JMenuItem();
+        jd_modificarEmpleado = new javax.swing.JDialog();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jt_nombreEmpleadoModificar = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jd_fechaNacimientoModificar = new com.toedter.calendar.JDateChooser();
+        jLabel20 = new javax.swing.JLabel();
+        jt_correoModificar = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        cb_cargoModificar = new javax.swing.JComboBox<>();
+        jb_modificarEmpleado = new javax.swing.JButton();
+        popupMenuEmpresa = new javax.swing.JPopupMenu();
+        jmi_detallesEmpresa = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -218,6 +232,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jLabel11.setText("Lista Empleados");
 
+        jButton1.setText("Log Out");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_interfazUsuarioLayout = new javax.swing.GroupLayout(jd_interfazUsuario.getContentPane());
         jd_interfazUsuario.getContentPane().setLayout(jd_interfazUsuarioLayout);
         jd_interfazUsuarioLayout.setHorizontalGroup(
@@ -238,6 +259,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addGap(0, 18, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_interfazUsuarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(46, 46, 46))
         );
         jd_interfazUsuarioLayout.setVerticalGroup(
             jd_interfazUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +280,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -340,6 +367,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         );
 
         jmi_modificar.setText("Modificar");
+        jmi_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_modificarActionPerformed(evt);
+            }
+        });
         popMenu_empleado.add(jmi_modificar);
 
         jmi_eliminar.setText("Eliminar");
@@ -351,6 +383,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         popMenu_empleado.add(jmi_eliminar);
 
         jmi_detalles.setText("Ver Detalles");
+        jmi_detalles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_detallesMouseClicked(evt);
+            }
+        });
         popMenu_empleado.add(jmi_detalles);
 
         jmi_contratar.setText("Contratar");
@@ -360,6 +397,94 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         popMenu_empleado.add(jmi_contratar);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel17.setText("Modificar Empleado");
+
+        jLabel18.setText("Nombre Completo: ");
+
+        jLabel19.setText("Fecha de Nacimiento:");
+
+        jLabel20.setText("Correo:");
+
+        jLabel21.setText("Cargo:");
+
+        cb_cargoModificar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingeniero", "Médico", "Estudiante", "Licenciado", "Maestro" }));
+
+        jb_modificarEmpleado.setText("Modificar");
+        jb_modificarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_modificarEmpleadoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_modificarEmpleadoLayout = new javax.swing.GroupLayout(jd_modificarEmpleado.getContentPane());
+        jd_modificarEmpleado.getContentPane().setLayout(jd_modificarEmpleadoLayout);
+        jd_modificarEmpleadoLayout.setHorizontalGroup(
+            jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                .addGroup(jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addComponent(jt_nombreEmpleadoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18)
+                                .addComponent(jd_fechaNacimientoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)
+                                .addComponent(jt_correoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addGap(18, 18, 18)
+                                .addComponent(cb_cargoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel17)))
+                .addContainerGap(75, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_modificarEmpleadoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jb_modificarEmpleado)
+                .addGap(38, 38, 38))
+        );
+        jd_modificarEmpleadoLayout.setVerticalGroup(
+            jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarEmpleadoLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jt_nombreEmpleadoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jd_fechaNacimientoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jt_correoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jd_modificarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(cb_cargoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jb_modificarEmpleado)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jmi_detallesEmpresa.setText("Ver Detalles");
+        jmi_detallesEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_detallesEmpresaActionPerformed(evt);
+            }
+        });
+        popupMenuEmpresa.add(jmi_detallesEmpresa);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -623,6 +748,90 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jl_listaEmpleados.setModel(modeloLista);
     }//GEN-LAST:event_jmi_eliminarActionPerformed
 
+    private void jmi_detallesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_detallesMouseClicked
+        // TODO add your handling code here:
+        DefaultListModel modeloLista = (DefaultListModel) jl_listaEmpleados.getModel();
+        JOptionPane.showMessageDialog(jd_interfazUsuario, ((Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex())).toString2());
+    }//GEN-LAST:event_jmi_detallesMouseClicked
+
+    private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
+        // TODO add your handling code here:
+        jd_modificarEmpleado.pack();
+        jd_modificarEmpleado.setModal(true);
+        jd_modificarEmpleado.setLocationRelativeTo(jd_interfazUsuario);
+        DefaultListModel modeloLista = (DefaultListModel) jl_listaEmpleados.getModel();
+        Empleado empleadoSeleccionado = (Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex());
+        jt_nombreEmpleadoModificar.setText(empleadoSeleccionado.getNombreEmpleado());
+        jt_correoModificar.setText(empleadoSeleccionado.getCorreo());
+        if (empleadoSeleccionado.getCargo().equals("Ingeniero")) {
+            cb_cargo.setSelectedIndex(0);
+        }
+        if (empleadoSeleccionado.getCargo().equals("Médico")) {
+            cb_cargo.setSelectedIndex(1);
+        }
+        if (empleadoSeleccionado.getCargo().equals("Estudiante")) {
+            cb_cargo.setSelectedIndex(2);
+        }
+        if (empleadoSeleccionado.getCargo().equals("Licenciado")) {
+            cb_cargo.setSelectedIndex(3);
+        }
+        if (empleadoSeleccionado.getCargo().equals("Maestro")) {
+            cb_cargo.setSelectedIndex(4);
+        }
+        jd_fechaNacimientoModificar.setDate(empleadoSeleccionado.getFechaNacimiento());
+        jd_modificarEmpleado.setVisible(true);
+    }//GEN-LAST:event_jmi_modificarActionPerformed
+
+    private void jb_modificarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarEmpleadoMouseClicked
+        // TODO add your handling code here:
+        try {
+            String nombreEmpleado = jt_nombreEmpleadoModificar.getText();
+            Date fechaNacimiento = jd_fechaNacimientoModificar.getDate();
+            String correo = jt_correoModificar.getText();
+            String cargo = (String) cb_cargoModificar.getSelectedItem();
+            double salario = 0;
+            if (cargo.equals("Ingeniero")) {
+                salario = 22000;
+            }
+            if (cargo.equals("Médico")) {
+                salario = 18000;
+            }
+            if (cargo.equals("Estudiante")) {
+                salario = 7600;
+            }
+            if (cargo.equals("Licenciado")) {
+                salario = 12000;
+            }
+            if (cargo.equals("Maestro")) {
+                salario = 2000;
+            }
+            DefaultListModel modeloLista = (DefaultListModel) jl_listaEmpleados.getModel();
+            Empleado empleadoSeleccionado = (Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex());
+            empleadoSeleccionado.setNombreEmpleado(nombreEmpleado);
+            empleadoSeleccionado.setCorreo(correo);
+            empleadoSeleccionado.setFechaNacimiento(fechaNacimiento);
+            empleadoSeleccionado.setSalario(salario);
+            empleadoSeleccionado.setCargo(cargo);
+            jl_listaEmpleados.setModel(modeloLista);
+            JOptionPane.showMessageDialog(jd_modificarEmpleado, "Empleado modificado Exitosamente");
+            jt_nombreEmpleadoModificar.setText("");
+            jt_correoModificar.setText("");
+            cb_cargoModificar.setSelectedIndex(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jd_CrearEmpleado, "Ocurrio un error Fatal");
+        }
+    }//GEN-LAST:event_jb_modificarEmpleadoMouseClicked
+
+    private void jmi_detallesEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_detallesEmpresaActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(jd_interfazUsuario, empresaActual.toString2());
+    }//GEN-LAST:event_jmi_detallesEmpresaActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        jd_interfazUsuario.setVisible(false);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -660,7 +869,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_cargo;
+    private javax.swing.JComboBox<String> cb_cargoModificar;
     private javax.swing.JComboBox<String> cb_tipoEmpresa;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -669,7 +880,12 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -683,29 +899,36 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jb_crearEmpleado;
     private javax.swing.JButton jb_crearEmpleado2;
     private javax.swing.JButton jb_crearEmpresa;
+    private javax.swing.JButton jb_modificarEmpleado;
     private javax.swing.JDialog jd_CrearEmpleado;
     private javax.swing.JDialog jd_CrearEmpresa;
     private com.toedter.calendar.JDateChooser jd_fechaFundacion;
     private com.toedter.calendar.JDateChooser jd_fechaNacimiento;
+    private com.toedter.calendar.JDateChooser jd_fechaNacimientoModificar;
     private javax.swing.JDialog jd_interfazUsuario;
+    private javax.swing.JDialog jd_modificarEmpleado;
     private javax.swing.JLabel jl_crearEmpresa;
     private javax.swing.JLabel jl_idempresa;
     private javax.swing.JList<String> jl_listaEmpleados;
     private javax.swing.JLabel jl_nombreEmpresa;
     private javax.swing.JMenuItem jmi_contratar;
     private javax.swing.JMenuItem jmi_detalles;
+    private javax.swing.JMenuItem jmi_detallesEmpresa;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JTextField jt_correo;
+    private javax.swing.JTextField jt_correoModificar;
     private javax.swing.JTree jt_empresa;
     private javax.swing.JTextField jt_idEmpresa;
     private javax.swing.JTextField jt_idSucursal;
     private javax.swing.JTextField jt_nombreEmpleado;
+    private javax.swing.JTextField jt_nombreEmpleadoModificar;
     private javax.swing.JTextField jt_nombreEmpresa;
     private javax.swing.JTextField jt_pinAccesoCrear;
     private javax.swing.JTextField jt_ubicacionEmpresa;
     private javax.swing.JPasswordField pf_pinacceso;
     private javax.swing.JPopupMenu popMenu_empleado;
+    private javax.swing.JPopupMenu popupMenuEmpresa;
     // End of variables declaration//GEN-END:variables
     ArrayList<Empresa> listaEmpresas = new ArrayList();
     Empresa empresaActual;

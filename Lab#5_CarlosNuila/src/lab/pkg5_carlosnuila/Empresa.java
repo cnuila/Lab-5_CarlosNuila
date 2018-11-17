@@ -102,12 +102,15 @@ public class Empresa {
     public void setModelo_empresa(DefaultTreeModel modelo_empresa) {
         this.modelo_empresa = modelo_empresa;
     }
-    
+     
     @Override
     public String toString() {
         return nombreEmpresa;
     }
-    
+
+    public String toString2() {
+        return "Nombre Empresa=" + nombreEmpresa + "\nCapital=" + capital + "\nFecha Fundación=" + fechaFundación + "\nUbicacion=" + ubicacion + "\nID Sucursal=" + idSucursal + "\nPin Acceso=" + pinAcceso;
+    }
     
     
     

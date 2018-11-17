@@ -81,6 +81,12 @@ public class Empleado {
     public String toString() {
         return nombreEmpleado;
     }
+
+    public String toString2() {
+        return "Nombre del Empleado=" + nombreEmpleado + "\nFecha de Nacimiento=" + fechaNacimiento + "\nCorreo=" + correo + "\nCargo=" + cargo + "\nSalario=" + salario;
+    }
+    
+    
     
     
     
