@@ -6,9 +6,11 @@
 package lab.pkg5_carlosnuila;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -388,6 +390,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 jmi_detallesMouseClicked(evt);
             }
         });
+        jmi_detalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_detallesActionPerformed(evt);
+            }
+        });
         popMenu_empleado.add(jmi_detalles);
 
         jmi_contratar.setText("Contratar");
@@ -601,7 +608,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 }
             }
             if (nombre == -1 && idsuc == -1) {
-                DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
+                JTree temporal = jt_empresa;
+                DefaultTreeModel modeloArbol = (DefaultTreeModel) temporal.getModel();
                 DefaultMutableTreeNode raiz_empresa = new DefaultMutableTreeNode(new Empresa(nombreEmpresa, capital, fechaFundacion, ubicacion, idSucursal, pinAcceso));
                 modeloArbol.setRoot(raiz_empresa);
                 listaEmpresas.add(new Empresa(nombreEmpresa, capital, fechaFundacion, ubicacion, idSucursal, pinAcceso, modeloArbol));
@@ -633,15 +641,16 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
             if (nombreEmpresa == 1 && pinAcceso == 1) {
                 empresaActual = listaEmpresas.get(i);
+                i = listaEmpresas.size();
             }
         }
         if (nombreEmpresa == 1 && pinAcceso == 1) {
             jd_interfazUsuario.pack();
             jd_interfazUsuario.setModal(true);
             jd_interfazUsuario.setLocationRelativeTo(this);
+            DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
             jl_nombreEmpresa.setText(empresaActual.getNombreEmpresa());
             jl_idempresa.setText(String.valueOf("ID " + empresaActual.getIdSucursal()));
-            DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
             modeloArbol = empresaActual.getModelo_Empresa();
             jd_interfazUsuario.setVisible(true);
             jt_idEmpresa.setText("");
@@ -710,6 +719,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 if (nodo_seleccionado.getUserObject() instanceof Empleado) {
                     if (nodo_seleccionado.toString().equals(((Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex())).getNombreEmpleado())) {
                         JOptionPane.showMessageDialog(jd_interfazUsuario, "No se puede contratar a usted mismo");
+                    } else {
+                        nodo_seleccionado.add(new DefaultMutableTreeNode(modeloLista.get(jl_listaEmpleados.getSelectedIndex())));
+                        double nuevoCapital = empresaActual.getCapital() - ((Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex())).getSalario();
                     }
                 } else {
                     nodo_seleccionado.add(new DefaultMutableTreeNode(modeloLista.get(jl_listaEmpleados.getSelectedIndex())));
@@ -732,7 +744,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             nodo_seleccionado = (DefaultMutableTreeNode) v1;
             if (nodo_seleccionado.getUserObject() instanceof Empresa) {
                 empresaActual = (Empresa) nodo_seleccionado.getUserObject();
-                //menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
+                popupMenuEmpresa.show(evt.getComponent(), evt.getX(), evt.getY());
             }
         }
         int row = jt_empresa.getClosestRowForLocation(evt.getX(), evt.getY());
@@ -750,8 +762,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
     private void jmi_detallesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_detallesMouseClicked
         // TODO add your handling code here:
-        DefaultListModel modeloLista = (DefaultListModel) jl_listaEmpleados.getModel();
-        JOptionPane.showMessageDialog(jd_interfazUsuario, ((Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex())).toString2());
+
     }//GEN-LAST:event_jmi_detallesMouseClicked
 
     private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
@@ -831,6 +842,12 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         jd_interfazUsuario.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jmi_detallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_detallesActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel modeloLista = (DefaultListModel) jl_listaEmpleados.getModel();
+        JOptionPane.showMessageDialog(jd_interfazUsuario, ((Empleado) modeloLista.get(jl_listaEmpleados.getSelectedIndex())).toString2());
+    }//GEN-LAST:event_jmi_detallesActionPerformed
 
     /**
      * @param args the command line arguments
